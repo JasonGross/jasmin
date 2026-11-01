@@ -67,8 +67,8 @@ Module LE.
     rewrite (nth_map O); first last.
     - rewrite size_iota.
       by apply/ltP.
-    rewrite /word.subword -word.urepr_word word.urepr_lsr Z.shiftr_0_l.
-    exact/eqP.
+    rewrite /word.subword -word.urepr_word word.urepr_lsr word.urepr_zero Z.shiftr_0_l.
+    exact: word.mkword0E.
   Qed.
 
 End LE.

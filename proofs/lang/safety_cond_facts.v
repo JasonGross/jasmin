@@ -65,7 +65,7 @@ Lemma safety_cond_holds_not_zero ws k (vs : values) (w : word ws) :
   nth undef_b vs k = Vword w -> safety_cond_holds vs (sc_not_zero ws k) = (w != 0%w).
 Proof.
 by move=> h;
-  rewrite /safety_cond_holds /sc_not_zero /sc_neqi /sc_toint /= h /= truncate_word_u /=.
+  rewrite /safety_cond_holds /sc_not_zero /sc_neqi /sc_toint /= h /= truncate_word_u /= word.word_eqE word.urepr0.
 Qed.
 
 (* -------------------------------------------------------------------- *)

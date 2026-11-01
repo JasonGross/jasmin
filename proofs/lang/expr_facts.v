@@ -187,6 +187,7 @@ Qed.
 
 Lemma is_zeroP sz e : reflect (e = @wconst sz 0) (is_zero sz e).
 Proof.
+  rewrite /wconst wunsigned0.
   case: e; try by right.
   case; try by right.
   move => sz' []; try by right.

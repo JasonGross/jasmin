@@ -3971,7 +3971,8 @@ End ILSTEPS_END.
       case: andP; last by [].
       case => _ /ltzP a_below; exfalso.
       move: a_below.
-      rewrite subE wunsigned_add -/(wunsigned (_ + _)) wunsigned_add //; first lia.
+      rewrite subE -{1}(wrepr_unsigned (top_stack m' + wrepr Uptr ofs)%R) -wrepr_opp.
+      rewrite wunsigned_add -/(wunsigned (_ + _)) wunsigned_add //; first lia.
       split; last by generalize (wunsigned_range a); lia.
       have := wsize_size_pos ws; lia.
     apply: (mm_write_invalid _ hle0); first exact: M; last first.

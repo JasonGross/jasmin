@@ -794,7 +794,7 @@ Section PROOF.
           by exists s1'; split => //=; rewrite /write_none /= cmp_le_refl orbT.
         rewrite (safety_cond_holds_x86_division Unsigned (sz := sz) (vs := [:: Vword _; Vword _; Vword _]) erefl erefl erefl) /=.
         have hw2' : (wunsigned w2 == 0%Z) = false.
-        + by apply /negbTE; apply /eqP => h; apply neq, wunsigned_inj.
+        + by apply /negbTE; apply /eqP => h; apply neq, wunsigned_inj; rewrite wunsigned0.
         rewrite hw2' wdwordu0.
         move: hw2' => /negbT -/(wunsigned_div_bound w1) -/negbTE -> /=.
         move: Hw; rewrite /wdivi => /(eeq_exc_write_lval hl hs1) [s1' -> ?].
@@ -829,7 +829,7 @@ Section PROOF.
           by exists s1'.
         rewrite (safety_cond_holds_x86_division Unsigned (sz := sz) (vs := [:: Vword _; Vword _; Vword _]) erefl erefl erefl) /=.
         have hw2' : (wunsigned w2 == 0%Z) = false.
-        + by apply /negbTE; apply /eqP => h; apply neq, wunsigned_inj.
+        + by apply /negbTE; apply /eqP => h; apply neq, wunsigned_inj; rewrite wunsigned0.
         rewrite hw2' wdwordu0.
         move: hw2' => /negbT -/(wunsigned_div_bound w1) -/negbTE -> /=.
         rewrite /write_none /= cmp_le_refl orbT /=.
@@ -1343,11 +1343,11 @@ Section PROOF.
       case: eqP => [ Ed | _ ].
       + subst d; exists s2'; split => //=.
         by rewrite /sem_sopn /sem_pexprs /exec_sopn /= !computational_eq_refl
-          Hvb /= Hwb /= /size_8_64 hsz2 /= add_wordE word1E -(zero_extend1 sz sz) Hw'.
+          Hvb /= Hwb /= /size_8_64 hsz2 /= add_wordE word1E -wrepr1 Hw'.
       case: eqP => [ Ed | _ ].
       + subst d; exists s2'; split => //=.
         by rewrite /sem_sopn /sem_pexprs /exec_sopn /= !computational_eq_refl
-          Hvb /= Hwb /= /size_8_64 hsz2 /= sub_wordE word1E -(zero_extend1 sz sz) -wrepr_opp Hw'.
+          Hvb /= Hwb /= /size_8_64 hsz2 /= sub_wordE word1E -wrepr1 -wrepr_opp Hw'.
       case: ifP => [ hrange | _ ].
       + exists s2'; split => //=.
         by rewrite /sem_sopn /sem_pexprs /exec_sopn /= !computational_eq_refl

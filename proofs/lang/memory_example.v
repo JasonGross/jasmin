@@ -472,7 +472,7 @@ Module MemoryI : MemoryT.
 
   Lemma init_mem_framesP stk_root :
     valid_frames 0 stk_root [::].
-  Proof. apply/lezP; rewrite Z.sub_0_r; exact: (proj1 (wunsigned_range _)). Qed.
+  Proof. apply/lezP; rewrite ?wunsigned0 Z.sub_0_r; exact: (proj1 (wunsigned_range _)). Qed.
 
   Lemma init_mem_stk_allocP (stk_root: pointer) s x :
     false →
@@ -698,6 +698,9 @@ Module MemoryI : MemoryT.
     rewrite wunsigned_add; lia.
   Qed.
 
+  (* simpl would unfold the stdlib word behind [wunsigned (add _ _)] *)
+  Local Opaque wunsigned.
+
   Lemma ass_init m ws_stk sz ioff sz' m' :
     alloc_stack m ws_stk sz ioff sz' = ok m' →
     ∀ p,
@@ -720,6 +723,8 @@ Module MemoryI : MemoryT.
     assert (add_pos := wunsigned_range  (add (stk_root m) (- footprint_of_stack (frames m)))).
     move: h; rewrite wunsigned_add; lia.
   Qed.
+
+  Local Transparent wunsigned.
 
   Lemma ass_read_old8 m ws_stk sz ioff sz' m' :
     alloc_stack m ws_stk sz ioff sz' = ok m' →
