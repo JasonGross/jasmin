@@ -223,7 +223,7 @@ Proof using lt_0_stk_max halign le_ws_ws_align hstack hsmall hbody rsp_nin.
     apply hzero.
     move: h hb; rewrite /between /zbetween wsize8 !zify /top.
     change x86_reg_size with Uptr.
-    rewrite -wrepr_sub -wrepr_opp -!GRing.addrA -!wrepr_add.
+    rewrite -wrepr_sub -wrepr_opp -!GRing.addrA -2!wrepr_add.
     have ? := [elaborate (wunsigned_range (align_word ws_align ptr))].
     rewrite wunsigned_sub_if.
     rewrite wunsigned_add; last by lia.
@@ -505,7 +505,7 @@ Proof using lt_0_stk_max halign le_ws_ws_align hstack hlarge hbody rsp_nin.
     apply hzero.
     move: h hb; rewrite /between /zbetween wsize8 !zify /top.
     change x86_reg_size with Uptr.
-    rewrite -wrepr_sub -wrepr_opp -!GRing.addrA -!wrepr_add.
+    rewrite -wrepr_sub -wrepr_opp -!GRing.addrA -2!wrepr_add.
     have ? := [elaborate (wunsigned_range (align_word ws_align ptr))].
     rewrite wunsigned_sub_if.
     rewrite wunsigned_add; last by lia.
@@ -821,7 +821,7 @@ Local Opaque wsize_size Z.of_nat.
     apply hzero.
     move: h hb; rewrite /between /zbetween wsize8 !zify /top.
     change x86_reg_size with Uptr.
-    rewrite -wrepr_opp -!GRing.addrA -!wrepr_add.
+    rewrite -wrepr_opp -!GRing.addrA -2!wrepr_add.
     have ? := [elaborate (wunsigned_range (align_word ws_align ptr))].
     rewrite wunsigned_sub_if.
     rewrite wunsigned_add; last by lia.
@@ -1055,7 +1055,7 @@ Local Opaque wsize_size Z.of_nat.
     apply hzero.
     move: h hb; rewrite /between /zbetween wsize8 !zify /top.
     change x86_reg_size with Uptr.
-    rewrite -wrepr_opp -!GRing.addrA -!wrepr_add.
+    rewrite -wrepr_opp -!GRing.addrA -2!wrepr_add.
     have ? := [elaborate (wunsigned_range (align_word ws_align ptr))].
     rewrite wunsigned_sub_if.
     rewrite wunsigned_add; last by lia.

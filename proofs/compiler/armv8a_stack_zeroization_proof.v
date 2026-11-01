@@ -362,7 +362,7 @@ Proof using atoI call_conv fn halign hbody hsmall hstack lbl le_ws_ws_align lefl
     apply hzero.
     move: h hb; rewrite /between /zbetween wsize8 !zify /top.
     change armv8a_reg_size with Uptr.
-    rewrite -wrepr_sub -wrepr_opp -!GRing.addrA -!wrepr_add.
+    rewrite -wrepr_sub -wrepr_opp -!GRing.addrA -2!wrepr_add.
     have ? := [elaborate (wunsigned_range (align_word ws_align ptr))].
     rewrite wunsigned_sub_if.
     rewrite wunsigned_add; last by lia.
@@ -583,7 +583,7 @@ Local Opaque wsize_size Z.of_nat.
     apply hzero.
     move: h hb; rewrite /between /zbetween wsize8 !zify /top.
     change armv8a_reg_size with Uptr.
-    rewrite -wrepr_opp -!GRing.addrA -!wrepr_add.
+    rewrite -wrepr_opp -!GRing.addrA -2!wrepr_add.
     have ? := [elaborate (wunsigned_range (align_word ws_align ptr))].
     rewrite wunsigned_sub_if.
     rewrite wunsigned_add; last by lia.

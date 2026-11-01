@@ -604,6 +604,8 @@ Proof.
       rewrite truncate_word_le // /size_8_64 hsz64 /= wxor_xx.
       set id := instr_desc_op (XOR sz).
       rewrite /SF_of_word msb0.
+      have -> : ZF_of_word (0%R : word sz) = true by rewrite /ZF_of_word eqxx.
+      have -> : PF_of_word (0%R : word sz) = true by rewrite /PF_of_word /= !w0E.
       by have [s' -> /= ?]:= (@compile_lvals _ _ _ _ _ _ _ _ _ _ _
              rip ii m lvs m' s [:: Reg r; Reg r]
              id.(id_out) id.(id_tout)
